@@ -20,18 +20,11 @@ public class CountObjects : MonoBehaviour {
 
         if (ObjectsToCollect.objects == 0)
         {
+            ObjectsToCollect.allObjectsCollected = true;
             //Application.LoadLevel("Next Level");
             objectUI.GetComponent<Text>().text = "All objects collected";
             Destroy(objectToDestroy);
             //StartCoroutine(DisplayAllObjectsCollected());
         }
-		
 	}
-
-    //IEnumerator DisplayAllObjectsCollected()
-    //{
-    //    objectUI.GetComponent<Text>().text = "All objects collected";
-    //    yield return new WaitForSeconds(5);
-    //    objectUI.GetComponent<Text>().text = "";
-    //}
 }

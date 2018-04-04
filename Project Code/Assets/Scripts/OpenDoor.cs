@@ -18,17 +18,20 @@ public class OpenDoor : MonoBehaviour
 
     private void OpenADoor()
     {
-        if(buttonPressed && doorIsOpen == false)
+        if(door != null)
         {
-            Debug.Log("Open A Door");
-            door.SetActive(false);
-            doorIsOpen = true;
-        }
-        else if(buttonPressed == false && doorIsOpen == true)
-        {
-            Debug.Log("Close A Door");
-            door.SetActive(true);
-            doorIsOpen = false;
+            if (buttonPressed && doorIsOpen == false)
+            {
+                Debug.Log("Open A Door");
+                door.SetActive(false);
+                doorIsOpen = true;
+            }
+            else if (buttonPressed == false && doorIsOpen == true)
+            {
+                Debug.Log("Close A Door");
+                door.SetActive(true);
+                doorIsOpen = false;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectsToCollect : MonoBehaviour {
 
     public static int objects;
+    public static bool allObjectsCollected = false;
 
 	private void Awake()
     {
