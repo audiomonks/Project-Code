@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CountObjects : MonoBehaviour {
 
     public string nextLevel;
-    public GameObject objectToDestroy;
+    //public GameObject objectToDestroy;
     public GameObject objectUI;
 
 	void Start () 
@@ -23,8 +23,7 @@ public class CountObjects : MonoBehaviour {
             ObjectsToCollect.allObjectsCollected = true;
             //Application.LoadLevel("Next Level");
             objectUI.GetComponent<Text>().text = "All objects collected";
-            Destroy(objectToDestroy);
-            //StartCoroutine(DisplayAllObjectsCollected());
+            //Destroy(objectToDestroy);
         }
 	}
 }

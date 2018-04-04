@@ -18,7 +18,7 @@ public class OpenDoor : MonoBehaviour
 
     private void OpenADoor()
     {
-        if(door != null)
+        if(door != null && door.tag == "Door")
         {
             if (buttonPressed && doorIsOpen == false)
             {
@@ -26,12 +26,32 @@ public class OpenDoor : MonoBehaviour
                 door.SetActive(false);
                 doorIsOpen = true;
             }
-            else if (buttonPressed == false && doorIsOpen == true)
+            else if (buttonPressed == false && doorIsOpen)
             {
                 Debug.Log("Close A Door");
                 door.SetActive(true);
                 doorIsOpen = false;
             }
+        }
+
+        if(door != null && door.tag == "Final Door" && ObjectsToCollect.allObjectsCollected)
+        {
+            if (buttonPressed && doorIsOpen == false)
+            {
+                Debug.Log("Open A Door");
+                door.SetActive(false);
+                doorIsOpen = true;
+            }
+            else if (buttonPressed == false && doorIsOpen)
+            {
+                Debug.Log("Close A Door");
+                door.SetActive(true);
+                doorIsOpen = false;
+            }
+        }
+        else if(door != null && door.tag == "Final Door" && ObjectsToCollect.allObjectsCollected == false)
+        {
+            buttonPressed = false;
         }
     }
 }

@@ -9,6 +9,9 @@ TagManager:
   - Grabbable
   - Collectables
   - Wall
+  - Final Door
+  - Door
+  - Final Button
   layers:
   - Default
   - TransparentFX

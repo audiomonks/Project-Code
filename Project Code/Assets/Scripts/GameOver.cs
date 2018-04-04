@@ -5,22 +5,25 @@ using UnityEngine.UI;
 
 public class GameOver : MonoBehaviour {
 
+    public static bool gameIsWon = false;
     public GameObject GameOverUI;
+    public GameObject pauseMenu;
 
 	private void OnTriggerEnter(Collider other)
 	{
         if(ObjectsToCollect.allObjectsCollected)
         {
-            SlowWin();
+            Win();
         }
 	}
 
-    public void SlowWin()
+    public void Win()
     {
+        gameIsWon = true;
         Debug.Log("SlowWin");
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameOverUI.SetActive(true);
-        Time.timeScale = .25f;
+        Time.timeScale = 0f;
     }
 }
