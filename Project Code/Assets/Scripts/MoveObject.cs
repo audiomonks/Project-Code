@@ -8,6 +8,7 @@ public class MoveObject : MonoBehaviour {
 	public GameObject tempParent;
     public Transform OriginalParent;
     public Transform guide;
+    public Rigidbody rigidbody;
     public bool isMovable = false;
     public bool isHolding = false;
 
@@ -15,6 +16,7 @@ public class MoveObject : MonoBehaviour {
     {
         item.GetComponent<Rigidbody>().useGravity = true;
         OriginalParent = item.transform.parent;
+        rigidbody = GetComponent<Rigidbody>();
 	}
 
     void Update()
@@ -23,8 +25,10 @@ public class MoveObject : MonoBehaviour {
         {
             item.GetComponent<Rigidbody>().useGravity = false;
             item.GetComponent<Rigidbody>().isKinematic = true;
-            item.transform.position = guide.transform.position;
-            item.transform.rotation = guide.transform.rotation;
+            //item.transform.position = guide.transform.position;
+            rigidbody.transform.position = guide.transform.position;
+            rigidbody.transform.rotation = guide.transform.rotation;
+
             item.transform.parent = tempParent.transform;
         }
         if (isHolding == true)
@@ -32,19 +36,10 @@ public class MoveObject : MonoBehaviour {
             item.GetComponent<Rigidbody>().useGravity = true;
             item.GetComponent<Rigidbody>().isKinematic = false;
             item.transform.parent = OriginalParent;
-            item.transform.position = guide.transform.position;
+
+            //item.transform.position = guide.transform.position;
+
+            rigidbody.transform.position = guide.transform.position;
         }
     }
-
-	private void OnCollisionEnter(Collision collision)
-	{
-        if(collision.transform.tag == "Wall")
-        {
-            item.GetComponent<Rigidbody>().useGravity = true;
-            item.GetComponent<Rigidbody>().isKinematic = false;
-            item.transform.parent = OriginalParent;
-            item.transform.position = guide.transform.position;
-        }
-
-	}
 }
