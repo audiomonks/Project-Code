@@ -18,68 +18,54 @@ public class PlayerScan : MonoBehaviour {
 
 	private const string INTERACTABLE = "Interactable";
 
-    void Start()
-    {
-
-    }
 	void Update () 
 	{
-        IsInteractable();
+        // Button
+        if (Input.GetMouseButtonUp(0))
+        {
+            ButtonPress();
+        }
+
+        if (Input.GetButtonDown("FireX"))
+        {
+            ButtonPress();
+        }
+
+        // Grabbable
+        if (Input.GetMouseButtonUp(0))
+        {
+            Grab();
+        }
+
+        if (Input.GetButtonDown("FireX"))
+        {
+            Grab();
+        }
 	}
 
-	void IsInteractable()
+	void ButtonPress()
 	{
 		RaycastHit hit;
 		if (Physics.Raycast (cam.transform.position, cam.transform.forward, out hit, range, mask)) 
 		{
             // Button
-            if(Input.GetMouseButtonUp(0) && hit.collider.tag == "Button")
+            if(hit.collider.tag == "Button")
             {
                 hit.collider.GetComponent<OpenDoor>().buttonPressed = !hit.collider.GetComponent<OpenDoor>().buttonPressed;
             }
-
-            if (Input.GetButtonDown("FireX") && hit.collider.tag == "Button")
-            {
-                hit.collider.GetComponent<OpenDoor>().buttonPressed = !hit.collider.GetComponent<OpenDoor>().buttonPressed;
-            }
-
-            // Grabbable
-            if (Input.GetMouseButtonUp(0) && hit.collider.tag == "Grabbable")
-            {
-                Debug.Log("Grabable Player Scan");
-                hit.collider.GetComponent<MoveObject>().isHolding = !hit.collider.GetComponent<MoveObject>().isHolding;
-            }
-
-            if (Input.GetButtonDown("FireX") && hit.collider.tag == "Grabbable")
-            {
-                hit.collider.GetComponent<MoveObject>().isHolding = !hit.collider.GetComponent<MoveObject>().isHolding;
-            }
-
-   //         bool _isZoomable = hit.collider.GetComponent<ItemManager>().isZoomable;
-   //         bool _hasACode = hit.collider.GetComponent<ItemManager>().hasACode;
-   //         cameraName = hit.collider.GetComponent<ItemManager>().name + "_Cam";
-
-   //         if (_isZoomable) 
-			//{
-   //             IsZoomable(hit);
-			//}
-   //         if (_hasACode) 
-			//{
-   //             hasACode = true;
-			//}
 		}
 	}
 
- //   void IsZoomable(RaycastHit _hit)
-	//{
- //       if (Input.GetButtonDown("Fire1") && isZoomActive == false)
- //       {
- //           isZoomActive = true;
- //       }
-
- //       else if (Input.GetButtonDown("Fire1") && isZoomActive)
- //       {
- //           isZoomActive = false;
- //       }
-	//}
+    void Grab()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, range, mask))
+        {
+            // Grabbable
+            if (hit.collider.tag == "Grabbable")
+            {
+                hit.collider.GetComponent<MoveObject>().isHolding = !hit.collider.GetComponent<MoveObject>().isHolding;
+            }
+        }
+    }
 }
